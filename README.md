@@ -1,6 +1,10 @@
 # InteractiveTodoApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.3.
+# TODO
+    - Create a todo list where users can add, edit, mark as completed, and delete tasks.
+    - Store data locally or integrate with JSONPlaceholder's "todos" endpoint (if applicable).
+    - Introduce different priority levels using tags or colors.
+    - Implement filtering and sorting options for enhanced organization.
 
 ## Development server
 
