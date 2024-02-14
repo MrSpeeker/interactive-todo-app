@@ -1,7 +1,41 @@
 <div class="todo-box" cdkDrag>
-  {{ todo.title }}
+  @if (!this.busyEditing) {
+  <div class="todo-details" [ngClass]="{ 'todo-completed': todo.completed }">
+    <h5 class="todo-title">{{ todo.title }}</h5>
+    <p class="todo-description">{{ todo.description }}</p>
+  </div>
+
   <div class="spacer"></div>
-  <mat-icon color="primary">check</mat-icon>
-  <mat-icon color="primary">edit</mat-icon>
-  <mat-icon color="warn">delete</mat-icon>
+  <button color="primary" (click)="completeTodoClicked()" mat-icon-button>
+    @if (this.todo.completed) {
+    <mat-icon color="primary">undo</mat-icon>
+    } @else {
+    <mat-icon color="primary">check</mat-icon>
+    }
+  </button>
+  <button color="primary" (click)="updateTodoClicked()" mat-icon-button>
+    <mat-icon color="primary">edit</mat-icon>
+  </button>
+  <button color="primary" (click)="deleteTodoClicked()" mat-icon-button>
+    <mat-icon color="warn">delete</mat-icon>
+  </button>
+  } @else {
+  <form class="todo-details" appearance="fill">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput />
+    </mat-form-field>
+  </form>
+  <div class="spacer"></div>
+  <button color="primary" (click)="saveClicked()" mat-icon-button>
+    <mat-icon color="primary">save</mat-icon>
+  </button>
+  <button color="primary" (click)="cancelClicked()" mat-icon-button>
+    <mat-icon color="warn">cancel</mat-icon>
+  </button>
+  }
 </div>

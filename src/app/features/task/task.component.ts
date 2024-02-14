@@ -1,13 +1,26 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 
 import { ITodo } from '../../models/todo.interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [MatCardModule, MatIconModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',
 })
@@ -18,16 +31,28 @@ export class TaskComponent {
   @Output() public completeEvent = new EventEmitter<ITodo>();
   @Output() public updateEvent = new EventEmitter<ITodo>();
 
-  public deleteClicked() {
+  public busyEditing = false;
+
+  public deleteTodoClicked() {
     this.deleteEvent.emit(this.todo.id);
   }
 
-  public updateClicked() {
+  public updateTodoClicked() {
+    this.busyEditing = !this.busyEditing;
     this.completeEvent.emit(this.todo);
   }
 
-  public completeClicked() {
-    this.todo.completed = true;
+  public completeTodoClicked() {
+    this.todo.completed = !this.todo.completed;
     this.completeEvent.emit(this.todo);
+  }
+
+  public saveClicked() {
+    this.busyEditing = !this.busyEditing;
+    this.updateEvent.emit(this.todo);
+  }
+
+  public cancelClicked() {
+    this.busyEditing = !this.busyEditing;
   }
 }
