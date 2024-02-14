@@ -1,0 +1,12 @@
+<app-tasks-toolbar></app-tasks-toolbar>
+<div
+  cdkDropList
+  #todoList="cdkDropList"
+  [cdkDropListData]="todos"
+  class="example-list"
+  (cdkDropListDropped)="drop($event)"
+>
+  @for (todo of todos; track todo.id) {
+  <app-task [todo]="todo" cdkDrag></app-task>
+  }
+</div>
